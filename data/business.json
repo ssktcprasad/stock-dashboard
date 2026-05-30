@@ -1,0 +1,1097 @@
+﻿{
+    "company":  "Tally ERP 9",
+    "currentFinancialYear":  "2026-27",
+    "updatedAt":  "2026-05-31 00:10:59",
+    "financialYears":  [
+                           {
+                               "financialYear":  "2026-27",
+                               "sales":  1255377.32,
+                               "turnover":  1255377.32,
+                               "cashSales":  388281.44,
+                               "creditSales":  867095.88,
+                               "productLines":  651
+                           }
+                       ],
+    "salesByYear":  {
+                        "2026-27":  {
+                                        "companySales":  [
+                                                             {
+                                                                 "name":  "Parijat Industries-Pest",
+                                                                 "amount":  301652.09
+                                                             },
+                                                             {
+                                                                 "name":  "Congrats Agro Pack Pvt Ltd",
+                                                                 "amount":  153661.15
+                                                             },
+                                                             {
+                                                                 "name":  "Crystal-Pest",
+                                                                 "amount":  109407.16
+                                                             },
+                                                             {
+                                                                 "name":  "Shiram Ferilisers and Chemicals-Pest",
+                                                                 "amount":  69016.81
+                                                             },
+                                                             {
+                                                                 "name":  "Adama India Ltd-Pest",
+                                                                 "amount":  67533.98
+                                                             },
+                                                             {
+                                                                 "name":  "Syngenta India Ltd-Pest",
+                                                                 "amount":  65839.04
+                                                             },
+                                                             {
+                                                                 "name":  "Sri Arka Agrisciences Pvt Ltd",
+                                                                 "amount":  58361.97
+                                                             },
+                                                             {
+                                                                 "name":  "Idhyah Agri Crop Sciences Pvt Ltd-Pest",
+                                                                 "amount":  45254.06
+                                                             },
+                                                             {
+                                                                 "name":  "Swal Corporation Ltd-Pest",
+                                                                 "amount":  36034.14
+                                                             },
+                                                             {
+                                                                 "name":  "Natco Pharma Limited-Pest",
+                                                                 "amount":  30233.76
+                                                             },
+                                                             {
+                                                                 "name":  "Agro Life -Pest",
+                                                                 "amount":  24864.33
+                                                             },
+                                                             {
+                                                                 "name":  "Atul Limited-Pest",
+                                                                 "amount":  24732.46
+                                                             },
+                                                             {
+                                                                 "name":  "Gentech Crop Sciences Pvt .Ltd-Gen",
+                                                                 "amount":  23571.39
+                                                             },
+                                                             {
+                                                                 "name":  "Pi Industries-Pest",
+                                                                 "amount":  22546.7
+                                                             },
+                                                             {
+                                                                 "name":  "Basf-Pest",
+                                                                 "amount":  20025.45
+                                                             },
+                                                             {
+                                                                 "name":  "Corteva Agri Sciences-Pest",
+                                                                 "amount":  17881.35
+                                                             },
+                                                             {
+                                                                 "name":  "GHARADA CHEMICLAS LTD-Pest",
+                                                                 "amount":  16406.92
+                                                             },
+                                                             {
+                                                                 "name":  "SUMITOMO CHEMICALS PVT LTD-Pest",
+                                                                 "amount":  16203.5
+                                                             },
+                                                             {
+                                                                 "name":  "Best Agrolife Limited-Pest",
+                                                                 "amount":  13771.25
+                                                             },
+                                                             {
+                                                                 "name":  "Willwood Company-Pest",
+                                                                 "amount":  12330.43
+                                                             },
+                                                             {
+                                                                 "name":  "Upl Limited",
+                                                                 "amount":  11415.26
+                                                             },
+                                                             {
+                                                                 "name":  "Bayer Crop Sciences",
+                                                                 "amount":  8805.07
+                                                             },
+                                                             {
+                                                                 "name":  "Indofil Industries Limited-Pest",
+                                                                 "amount":  8008.48
+                                                             },
+                                                             {
+                                                                 "name":  "VIVA CROP SCEIENCE-PEST",
+                                                                 "amount":  7923.7
+                                                             },
+                                                             {
+                                                                 "name":  "Vijaydurga Phosphates",
+                                                                 "amount":  6742.9
+                                                             },
+                                                             {
+                                                                 "name":  "Advance Pesticides-Pest",
+                                                                 "amount":  6489.15
+                                                             },
+                                                             {
+                                                                 "name":  "Ramcides Crop Sciences Pvt Ltd-Pest",
+                                                                 "amount":  6313.54
+                                                             },
+                                                             {
+                                                                 "name":  "Basf -Fert",
+                                                                 "amount":  5999.98
+                                                             },
+                                                             {
+                                                                 "name":  "J U Agri Sciences-Pest",
+                                                                 "amount":  5054.27
+                                                             },
+                                                             {
+                                                                 "name":  "Anu Company",
+                                                                 "amount":  4644.08
+                                                             },
+                                                             {
+                                                                 "name":  "Gentech Crop Science -Fert",
+                                                                 "amount":  4595.28
+                                                             },
+                                                             {
+                                                                 "name":  "FMC INDIA LTD-Pest",
+                                                                 "amount":  4110.16
+                                                             },
+                                                             {
+                                                                 "name":  "Dhanuka Agritech Limited",
+                                                                 "amount":  3813.57
+                                                             },
+                                                             {
+                                                                 "name":  "Nichino India Pvt Ltd-Pest",
+                                                                 "amount":  3644.07
+                                                             },
+                                                             {
+                                                                 "name":  "Nakasa Bio Tech-Gen",
+                                                                 "amount":  3619.05
+                                                             },
+                                                             {
+                                                                 "name":  "Fertibase Agri Solutions Pvt Ltd-Fert",
+                                                                 "amount":  3428.56
+                                                             },
+                                                             {
+                                                                 "name":  "Ram Cides Crop Sciences Pvt Ltd-Gen",
+                                                                 "amount":  3095.2
+                                                             },
+                                                             {
+                                                                 "name":  "Shriram Fertilisers",
+                                                                 "amount":  2542.38
+                                                             },
+                                                             {
+                                                                 "name":  "Aries-Fert",
+                                                                 "amount":  2190.45
+                                                             },
+                                                             {
+                                                                 "name":  "Srujana Life Sciences-Bio",
+                                                                 "amount":  2142.9
+                                                             },
+                                                             {
+                                                                 "name":  "Advance Pesticides-Gen",
+                                                                 "amount":  2142.85
+                                                             },
+                                                             {
+                                                                 "name":  "Wilshare Company",
+                                                                 "amount":  2118.63
+                                                             },
+                                                             {
+                                                                 "name":  "Oscar Crop Sciences-Gen",
+                                                                 "amount":  2095.24
+                                                             },
+                                                             {
+                                                                 "name":  "Indofil Industries -Gen",
+                                                                 "amount":  1500
+                                                             },
+                                                             {
+                                                                 "name":  "Pci Pest Control-Pest",
+                                                                 "amount":  1473.88
+                                                             },
+                                                             {
+                                                                 "name":  "Syngenta India -Gen",
+                                                                 "amount":  1380.95
+                                                             },
+                                                             {
+                                                                 "name":  "Dharmaj Crop Sciences Ltd",
+                                                                 "amount":  1355.94
+                                                             },
+                                                             {
+                                                                 "name":  "Tropical -Pest",
+                                                                 "amount":  1305.1
+                                                             },
+                                                             {
+                                                                 "name":  "Es Discovery India Private Limited",
+                                                                 "amount":  1271.19
+                                                             },
+                                                             {
+                                                                 "name":  "Fmc India Ltd-Fert",
+                                                                 "amount":  1257.14
+                                                             }
+                                                         ],
+                                        "productSales":  [
+                                                             {
+                                                                 "name":  "Pariquat 5lt",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  88983.3
+                                                             },
+                                                             {
+                                                                 "name":  "Khandala 500ml",
+                                                                 "companyName":  "Congrats Agro Pack Pvt Ltd",
+                                                                 "amount":  68728.73
+                                                             },
+                                                             {
+                                                                 "name":  "Gramoxone 5lt",
+                                                                 "companyName":  "Crystal-Pest",
+                                                                 "amount":  63050.88
+                                                             },
+                                                             {
+                                                                 "name":  "Fiptor 100gms",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  56779.4
+                                                             },
+                                                             {
+                                                                 "name":  "Simodis 120ml",
+                                                                 "companyName":  "Syngenta India Ltd-Pest",
+                                                                 "amount":  52322.13
+                                                             },
+                                                             {
+                                                                 "name":  "Leonis 1lt",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  46270.98
+                                                             },
+                                                             {
+                                                                 "name":  "Parakot 5lt",
+                                                                 "companyName":  "Idhyah Agri Crop Sciences Pvt Ltd-Pest",
+                                                                 "amount":  45254.06
+                                                             },
+                                                             {
+                                                                 "name":  "Paranex5lt",
+                                                                 "companyName":  "Adama India Ltd-Pest",
+                                                                 "amount":  44491.56
+                                                             },
+                                                             {
+                                                                 "name":  "Khandal 100ml",
+                                                                 "companyName":  "Congrats Agro Pack Pvt Ltd",
+                                                                 "amount":  41373.18
+                                                             },
+                                                             {
+                                                                 "name":  "Victory 700ml+700ml",
+                                                                 "companyName":  "Sri Arka Agrisciences Pvt Ltd",
+                                                                 "amount":  35571.51
+                                                             },
+                                                             {
+                                                                 "name":  "NANEXT 100ML",
+                                                                 "companyName":  "Natco Pharma Limited-Pest",
+                                                                 "amount":  30233.76
+                                                             },
+                                                             {
+                                                                 "name":  "Xyfen Ultra 1lt",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  28474.53
+                                                             },
+                                                             {
+                                                                 "name":  "Lisbon 500ml",
+                                                                 "companyName":  "Congrats Agro Pack Pvt Ltd",
+                                                                 "amount":  25169.4
+                                                             },
+                                                             {
+                                                                 "name":  "Salix 2.4 D 500gms",
+                                                                 "companyName":  "Atul Limited-Pest",
+                                                                 "amount":  24732.46
+                                                             },
+                                                             {
+                                                                 "name":  "Monostar 500ml",
+                                                                 "companyName":  "Swal Corporation Ltd-Pest",
+                                                                 "amount":  22610.37
+                                                             },
+                                                             {
+                                                                 "name":  "Shiram Acrius 1lt",
+                                                                 "companyName":  "Shiram Ferilisers and Chemicals-Pest",
+                                                                 "amount":  21313.42
+                                                             },
+                                                             {
+                                                                 "name":  "Gramoxone 1lt",
+                                                                 "companyName":  "Crystal-Pest",
+                                                                 "amount":  21101.92
+                                                             },
+                                                             {
+                                                                 "name":  "Shriram Trexter 180ml",
+                                                                 "companyName":  "Shiram Ferilisers and Chemicals-Pest",
+                                                                 "amount":  16949.15
+                                                             },
+                                                             {
+                                                                 "name":  "Leonis 500ml",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  16271.16
+                                                             },
+                                                             {
+                                                                 "name":  "Khandala 250ml",
+                                                                 "companyName":  "Congrats Agro Pack Pvt Ltd",
+                                                                 "amount":  15000.08
+                                                             },
+                                                             {
+                                                                 "name":  "Shriram Profen Plus 1t",
+                                                                 "companyName":  "Shiram Ferilisers and Chemicals-Pest",
+                                                                 "amount":  14703.37
+                                                             },
+                                                             {
+                                                                 "name":  "2.4-D Agan 500gm",
+                                                                 "companyName":  "Adama India Ltd-Pest",
+                                                                 "amount":  14610.22
+                                                             },
+                                                             {
+                                                                 "name":  "Johnny 250ml",
+                                                                 "companyName":  "GHARADA CHEMICLAS LTD-Pest",
+                                                                 "amount":  13762.84
+                                                             },
+                                                             {
+                                                                 "name":  "Sanquat 5lt",
+                                                                 "companyName":  "Agro Life -Pest",
+                                                                 "amount":  13220.28
+                                                             },
+                                                             {
+                                                                 "name":  "Twist 500ml+500ml",
+                                                                 "companyName":  "Gentech Crop Sciences Pvt .Ltd-Gen",
+                                                                 "amount":  12857.13
+                                                             },
+                                                             {
+                                                                 "name":  "Cabriotop 600gms",
+                                                                 "companyName":  "Basf-Pest",
+                                                                 "amount":  11491.56
+                                                             },
+                                                             {
+                                                                 "name":  "FYTOLAN 500GMS",
+                                                                 "companyName":  "Syngenta India Ltd-Pest",
+                                                                 "amount":  10550.76
+                                                             },
+                                                             {
+                                                                 "name":  "Kemstar Easy 500ml",
+                                                                 "companyName":  "SUMITOMO CHEMICALS PVT LTD-Pest",
+                                                                 "amount":  10169.6
+                                                             },
+                                                             {
+                                                                 "name":  "War 100ml",
+                                                                 "companyName":  "Sri Arka Agrisciences Pvt Ltd",
+                                                                 "amount":  9857.11
+                                                             },
+                                                             {
+                                                                 "name":  "Kefun 100ml",
+                                                                 "companyName":  "Pi Industries-Pest",
+                                                                 "amount":  9746
+                                                             },
+                                                             {
+                                                                 "name":  "Tilt 500ml",
+                                                                 "companyName":  "Crystal-Pest",
+                                                                 "amount":  9491.6
+                                                             },
+                                                             {
+                                                                 "name":  "Pariquat 1lt",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  8771.02
+                                                             },
+                                                             {
+                                                                 "name":  "Exponus 34ml",
+                                                                 "companyName":  "Basf-Pest",
+                                                                 "amount":  8305.08
+                                                             },
+                                                             {
+                                                                 "name":  "Kocide 250gms",
+                                                                 "companyName":  "Corteva Agri Sciences-Pest",
+                                                                 "amount":  8178
+                                                             },
+                                                             {
+                                                                 "name":  "Dash 500ml",
+                                                                 "companyName":  "Sri Arka Agrisciences Pvt Ltd",
+                                                                 "amount":  8000
+                                                             },
+                                                             {
+                                                                 "name":  "VIVAPHOS 1LT",
+                                                                 "companyName":  "VIVA CROP SCEIENCE-PEST",
+                                                                 "amount":  7923.7
+                                                             },
+                                                             {
+                                                                 "name":  "Phoskill 1lt",
+                                                                 "companyName":  "Upl Limited",
+                                                                 "amount":  7728.8
+                                                             },
+                                                             {
+                                                                 "name":  "ROONFEN 250ML",
+                                                                 "companyName":  "Best Agrolife Limited-Pest",
+                                                                 "amount":  7711.9
+                                                             },
+                                                             {
+                                                                 "name":  "Audicia 1lt",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  7711.9
+                                                             },
+                                                             {
+                                                                 "name":  "Implicite 170ml",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  7203.4
+                                                             },
+                                                             {
+                                                                 "name":  "Leonis 250ml",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  7118.64
+                                                             },
+                                                             {
+                                                                 "name":  "Alecto 100ml",
+                                                                 "companyName":  "Indofil Industries Limited-Pest",
+                                                                 "amount":  6864.42
+                                                             },
+                                                             {
+                                                                 "name":  "Minolite 1lt",
+                                                                 "companyName":  "Gentech Crop Sciences Pvt .Ltd-Gen",
+                                                                 "amount":  6857.12
+                                                             },
+                                                             {
+                                                                 "name":  "Keefun 250ml",
+                                                                 "companyName":  "Pi Industries-Pest",
+                                                                 "amount":  6610.2
+                                                             },
+                                                             {
+                                                                 "name":  "Shriram Profen Plus 500ml.",
+                                                                 "companyName":  "Shiram Ferilisers and Chemicals-Pest",
+                                                                 "amount":  6432.23
+                                                             },
+                                                             {
+                                                                 "name":  "Biovita 1lt",
+                                                                 "companyName":  "Pi Industries-Pest",
+                                                                 "amount":  6190.5
+                                                             },
+                                                             {
+                                                                 "name":  "SHATRAJEET 1LT",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  6059.35
+                                                             },
+                                                             {
+                                                                 "name":  "RONFEN 250ML",
+                                                                 "companyName":  "Best Agrolife Limited-Pest",
+                                                                 "amount":  6059.35
+                                                             },
+                                                             {
+                                                                 "name":  "Liberl Tmx 1kg",
+                                                                 "companyName":  "Basf -Fert",
+                                                                 "amount":  5999.98
+                                                             },
+                                                             {
+                                                                 "name":  "Remostar 1lt",
+                                                                 "companyName":  "Swal Corporation Ltd-Pest",
+                                                                 "amount":  5847.45
+                                                             },
+                                                             {
+                                                                 "name":  "Vijay 13:0:45 1kg",
+                                                                 "companyName":  "Vijaydurga Phosphates",
+                                                                 "amount":  5114.32
+                                                             },
+                                                             {
+                                                                 "name":  "LUNOX 1LT",
+                                                                 "companyName":  "Crystal-Pest",
+                                                                 "amount":  5084.76
+                                                             },
+                                                             {
+                                                                 "name":  "Anu 2,4 D Sodium Salt 500gms",
+                                                                 "companyName":  "Anu Company",
+                                                                 "amount":  4644.08
+                                                             },
+                                                             {
+                                                                 "name":  "Hungama Gold 500ml",
+                                                                 "companyName":  "J U Agri Sciences-Pest",
+                                                                 "amount":  4376.26
+                                                             },
+                                                             {
+                                                                 "name":  "Oberon 200ml",
+                                                                 "companyName":  "Bayer Crop Sciences",
+                                                                 "amount":  4237.3
+                                                             },
+                                                             {
+                                                                 "name":  "Pariflex 400ml",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  4067.76
+                                                             },
+                                                             {
+                                                                 "name":  "RESCUE 250ML",
+                                                                 "companyName":  "Sri Arka Agrisciences Pvt Ltd",
+                                                                 "amount":  3952.4
+                                                             },
+                                                             {
+                                                                 "name":  "Tychi 500ml",
+                                                                 "companyName":  "Nichino India Pvt Ltd-Pest",
+                                                                 "amount":  3644.07
+                                                             },
+                                                             {
+                                                                 "name":  "Nagastra 1lt",
+                                                                 "companyName":  "Nakasa Bio Tech-Gen",
+                                                                 "amount":  3619.05
+                                                             },
+                                                             {
+                                                                 "name":  "Daita 500ml",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  3432.24
+                                                             },
+                                                             {
+                                                                 "name":  "Ferti 6 :0 :18 1lt",
+                                                                 "companyName":  "Fertibase Agri Solutions Pvt Ltd-Fert",
+                                                                 "amount":  3428.56
+                                                             },
+                                                             {
+                                                                 "name":  "Eugene 250gms",
+                                                                 "companyName":  "Congrats Agro Pack Pvt Ltd",
+                                                                 "amount":  3389.76
+                                                             },
+                                                             {
+                                                                 "name":  "Spadin 80ml",
+                                                                 "companyName":  "Corteva Agri Sciences-Pest",
+                                                                 "amount":  3220.3
+                                                             },
+                                                             {
+                                                                 "name":  "Allwin Gold Super 500ml",
+                                                                 "companyName":  "Ram Cides Crop Sciences Pvt Ltd-Gen",
+                                                                 "amount":  3095.2
+                                                             },
+                                                             {
+                                                                 "name":  "Remostar 500ml",
+                                                                 "companyName":  "Swal Corporation Ltd-Pest",
+                                                                 "amount":  3050.85
+                                                             },
+                                                             {
+                                                                 "name":  "Perform 500gms",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  3050.82
+                                                             },
+                                                             {
+                                                                 "name":  "Mortel 250ml",
+                                                                 "companyName":  "Parijat Industries-Pest",
+                                                                 "amount":  3050.8
+                                                             },
+                                                             {
+                                                                 "name":  "Klip 250gms",
+                                                                 "companyName":  "Agro Life -Pest",
+                                                                 "amount":  2881.36
+                                                             },
+                                                             {
+                                                                 "name":  "Trassid 500ml",
+                                                                 "companyName":  "Adama India Ltd-Pest",
+                                                                 "amount":  2711.86
+                                                             },
+                                                             {
+                                                                 "name":  "ED-MAX 1LT",
+                                                                 "companyName":  "Willwood Company-Pest",
+                                                                 "amount":  2711.86
+                                                             },
+                                                             {
+                                                                 "name":  "Abacin 100ml",
+                                                                 "companyName":  "Crystal-Pest",
+                                                                 "amount":  2711.84
+                                                             },
+                                                             {
+                                                                 "name":  "Shriram Fiprid 100gms",
+                                                                 "companyName":  "Shiram Ferilisers and Chemicals-Pest",
+                                                                 "amount":  2711.84
+                                                             },
+                                                             {
+                                                                 "name":  "Pedestal 100ml",
+                                                                 "companyName":  "Adama India Ltd-Pest",
+                                                                 "amount":  2669.49
+                                                             },
+                                                             {
+                                                                 "name":  "Swat 500ml",
+                                                                 "companyName":  "Swal Corporation Ltd-Pest",
+                                                                 "amount":  2644.1
+                                                             },
+                                                             {
+                                                                 "name":  "Agrogen Max Pro 250gms",
+                                                                 "companyName":  "Gentech Crop Science -Fert",
+                                                                 "amount":  2619.1
+                                                             },
+                                                             {
+                                                                 "name":  "Shriram Doppelt 1lt",
+                                                                 "companyName":  "Shriram Fertilisers",
+                                                                 "amount":  2542.38
+                                                             },
+                                                             {
+                                                                 "name":  "Miraclun 1lt",
+                                                                 "companyName":  "Corteva Agri Sciences-Pest",
+                                                                 "amount":  2542.38
+                                                             },
+                                                             {
+                                                                 "name":  "Kemstar Easy 1lt",
+                                                                 "companyName":  "SUMITOMO CHEMICALS PVT LTD-Pest",
+                                                                 "amount":  2542.36
+                                                             },
+                                                             {
+                                                                 "name":  "Oxyguard 500ml",
+                                                                 "companyName":  "Willwood Company-Pest",
+                                                                 "amount":  2542.35
+                                                             },
+                                                             {
+                                                                 "name":  "Award 1lt",
+                                                                 "companyName":  "Advance Pesticides-Pest",
+                                                                 "amount":  2380.95
+                                                             }
+                                                         ]
+                                    }
+                    },
+    "receivables":  {
+                        "total":  4803901.27,
+                        "customerCount":  78,
+                        "customers":  [
+                                          {
+                                              "name":  "KATA KISHORE",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  455833
+                                          },
+                                          {
+                                              "name":  "Pusuluri Ramakrishna-Chintapalipaddu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  341940
+                                          },
+                                          {
+                                              "name":  "Chenna Reddy Chillies",
+                                              "address":  "Gunutr",
+                                              "phone":  "",
+                                              "amount":  322673.56
+                                          },
+                                          {
+                                              "name":  "Chamarthi Vasista-Guntur",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  302350
+                                          },
+                                          {
+                                              "name":  "Bhasker Chillies-Guntur",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  226950
+                                          },
+                                          {
+                                              "name":  "Boyana Srinivas Rao",
+                                              "address":  "Kondamudi",
+                                              "phone":  "",
+                                              "amount":  183744
+                                          },
+                                          {
+                                              "name":  "Mabbur -Nagulupalapaddu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  180510
+                                          },
+                                          {
+                                              "name":  "Valluri Gopi (Shop)-Haafpeta",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  166840
+                                          },
+                                          {
+                                              "name":  "Pasupleti Venkat Rao-Vkpuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  151091
+                                          },
+                                          {
+                                              "name":  "Madamanchi Ramiah -Katrapadu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  136520
+                                          },
+                                          {
+                                              "name":  "Nalluri Chinna Panniah-Bandarupalli",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  133350
+                                          },
+                                          {
+                                              "name":  "Nanda Agencies-Podalakur",
+                                              "address":  "",
+                                              "phone":  "7207210686",
+                                              "amount":  130050
+                                          },
+                                          {
+                                              "name":  "Valluri Raja Rao-Haafpeta",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  129970
+                                          },
+                                          {
+                                              "name":  "Kiran Sai Enterprises-Mothadaka",
+                                              "address":  "Mothadaka",
+                                              "phone":  "",
+                                              "amount":  118500
+                                          },
+                                          {
+                                              "name":  "Vaarahi Fertilizers and General Goods-Kolakaluru",
+                                              "address":  "",
+                                              "phone":  "9100535687",
+                                              "amount":  104299
+                                          },
+                                          {
+                                              "name":  "DULLA MOHAN RAO -VNPALEM",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  89930
+                                          },
+                                          {
+                                              "name":  "Kollimarla Narendra-Haafpeta",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  88900
+                                          },
+                                          {
+                                              "name":  "Shiak Rasul -Penumulli",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  86670
+                                          },
+                                          {
+                                              "name":  "Pentapati Srinivas Rao-Garapaddu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  86580
+                                          },
+                                          {
+                                              "name":  "Korukonda Gopi  Kondamudi",
+                                              "address":  "Kondamudi",
+                                              "phone":  "",
+                                              "amount":  85810
+                                          },
+                                          {
+                                              "name":  "Kadava Anjaneyllu- Vkpuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  75690
+                                          },
+                                          {
+                                              "name":  "Narendra -Sirangapuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  70000
+                                          },
+                                          {
+                                              "name":  "Suresh Reddy-Lingaguntlapalem",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  67260
+                                          },
+                                          {
+                                              "name":  "Tota Babu -Vkpuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  67030
+                                          },
+                                          {
+                                              "name":  "Amisetty Koteswar Rao -Vkpuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  62330
+                                          },
+                                          {
+                                              "name":  "Anil Chillies-Guntur",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  61880
+                                          },
+                                          {
+                                              "name":  "Pedapogu Avuliah-Rangapuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  53670
+                                          },
+                                          {
+                                              "name":  "Kishaan Varun Friend",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  50000
+                                          },
+                                          {
+                                              "name":  "Babai-Gentech",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  47150
+                                          },
+                                          {
+                                              "name":  "Kotapalli Sheshagiri Rao -Gollpalem",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  46010
+                                          },
+                                          {
+                                              "name":  "P Suresh Kumar-KATHIPUDI",
+                                              "address":  "",
+                                              "phone":  "9912060351",
+                                              "amount":  39460
+                                          },
+                                          {
+                                              "name":  "Krishna Reddy -Sowpaddu",
+                                              "address":  "Sowpaddu",
+                                              "phone":  "",
+                                              "amount":  32265
+                                          },
+                                          {
+                                              "name":  "Sv Pest Control",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  30000
+                                          },
+                                          {
+                                              "name":  "Nagaboyna Veeriah -Tikkireddypalem",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  29790
+                                          },
+                                          {
+                                              "name":  "Sri Rama Seeds -Guntur",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  28500
+                                          },
+                                          {
+                                              "name":  "Jayakrishna Fertilisers-Lemallepadu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  27900
+                                          },
+                                          {
+                                              "name":  "VALLURI SRINIVAS RAO-HAAFPETA",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  27080
+                                          },
+                                          {
+                                              "name":  "Batula Parusdha Rao -Kolimarla",
+                                              "address":  "",
+                                              "phone":  "8008348296",
+                                              "amount":  25320
+                                          },
+                                          {
+                                              "name":  "Archena Venkat Rao- Peparu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  25290
+                                          },
+                                          {
+                                              "name":  "Kandula Srikanth -Vargani",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  24649.97
+                                          },
+                                          {
+                                              "name":  "Sai Ram Enterprises -Cherukupalli",
+                                              "address":  "",
+                                              "phone":  "9494645147",
+                                              "amount":  24100
+                                          },
+                                          {
+                                              "name":  "Sri Kirthi Seeds-Ganapavaram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  24000
+                                          },
+                                          {
+                                              "name":  "Triveni Traders-Dodeluru",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  24000
+                                          },
+                                          {
+                                              "name":  "Emperlla Chintayya-Sudapalli",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  23480
+                                          },
+                                          {
+                                              "name":  "Sunku Ram Mohan -Vkpuram",
+                                              "address":  "",
+                                              "phone":  "7288823745",
+                                              "amount":  21500
+                                          },
+                                          {
+                                              "name":  "Pedapudi Srihari Babu-Haafpeta",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  21440
+                                          },
+                                          {
+                                              "name":  "Manduri Gopinath-Seetarampuram",
+                                              "address":  "Seetarampuram",
+                                              "phone":  "",
+                                              "amount":  20950
+                                          },
+                                          {
+                                              "name":  "Sri Venkateswara Traders -Kakarlamudi",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  19899.99
+                                          },
+                                          {
+                                              "name":  "Ammisetty Koteswar Rao-Vkpuram",
+                                              "address":  "C/o Rmachandra Friend",
+                                              "phone":  "",
+                                              "amount":  19295
+                                          },
+                                          {
+                                              "name":  "Balakrishna -Chintapalipaddu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  17150
+                                          },
+                                          {
+                                              "name":  "K.S.R Traders-Ponnur",
+                                              "address":  "",
+                                              "phone":  "9849040095",
+                                              "amount":  16500.82
+                                          },
+                                          {
+                                              "name":  "Bikki Manush Kumar-Ongole",
+                                              "address":  "",
+                                              "phone":  "8464863989",
+                                              "amount":  16230
+                                          },
+                                          {
+                                              "name":  "Sri Venkata Siva Rythu Depot -Podalakur",
+                                              "address":  "",
+                                              "phone":  "7382016089",
+                                              "amount":  15408
+                                          },
+                                          {
+                                              "name":  "Andhrapradeshforest Developmentcorpration",
+                                              "address":  "Viazag",
+                                              "phone":  "",
+                                              "amount":  13500
+                                          },
+                                          {
+                                              "name":  "Assistant Director of Agriculture (Regular)-Guntur",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  13347
+                                          },
+                                          {
+                                              "name":  "Sri Krishna Enterprises-Malladi",
+                                              "address":  "",
+                                              "phone":  "8187845018",
+                                              "amount":  9357.98
+                                          },
+                                          {
+                                              "name":  "Shiak Hussain-Rangapuram",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  9200
+                                          },
+                                          {
+                                              "name":  "Tota Srinivas",
+                                              "address":  "Kotareddypalem",
+                                              "phone":  "8897856961",
+                                              "amount":  8750
+                                          },
+                                          {
+                                              "name":  "Ramakrishna Totamalla C/o  Manikanta Electronics",
+                                              "address":  "",
+                                              "phone":  "8500908467",
+                                              "amount":  8400
+                                          },
+                                          {
+                                              "name":  "Meersha Vemuluripaddu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  7920
+                                          },
+                                          {
+                                              "name":  "Sri Subadra Agencies -Kakinada",
+                                              "address":  "",
+                                              "phone":  "8919068054",
+                                              "amount":  7250
+                                          },
+                                          {
+                                              "name":  "Kalki Bhagavan Traders -Muttlur",
+                                              "address":  "",
+                                              "phone":  "9010686292",
+                                              "amount":  6660
+                                          },
+                                          {
+                                              "name":  "Joint Director of Agriculture-Guntur",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  5550
+                                          },
+                                          {
+                                              "name":  "Tadikonda Vamanamurthy",
+                                              "address":  "Haafpeta",
+                                              "phone":  "",
+                                              "amount":  5300
+                                          },
+                                          {
+                                              "name":  "Kavithaa Trader-Mutluru",
+                                              "address":  "",
+                                              "phone":  "9248867669",
+                                              "amount":  4920
+                                          },
+                                          {
+                                              "name":  "Narsasnn-Umudappur",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  4800
+                                          },
+                                          {
+                                              "name":  "Shiva Jamalamadugu",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  4488
+                                          },
+                                          {
+                                              "name":  "DEVAKI TRADERS -MAYLAVARAM",
+                                              "address":  "",
+                                              "phone":  "8886419366",
+                                              "amount":  3600
+                                          },
+                                          {
+                                              "name":  "Nalkallu-Ibrahimpur",
+                                              "address":  "",
+                                              "phone":  "",
+                                              "amount":  3070
+                                          },
+                                          {
+                                              "name":  "Sulphur Mills -Guntur",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  2086
+                                          },
+                                          {
+                                              "name":  "Rythumitra Entrprises -Vijaynagram",
+                                              "address":  "",
+                                              "phone":  "9866634574",
+                                              "amount":  2000
+                                          },
+                                          {
+                                              "name":  "Sri Maha Lakshmi Agencies",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  1969.96
+                                          },
+                                          {
+                                              "name":  "Vijay Lakshmi Enterprises-Guntur",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  1350
+                                          },
+                                          {
+                                              "name":  "Premier Tobbaco Packers Pvt Ltd",
+                                              "address":  "Guntur",
+                                              "phone":  "",
+                                              "amount":  1150
+                                          },
+                                          {
+                                              "name":  "Sri Siva Sai Enterprises-Vegendla",
+                                              "address":  "",
+                                              "phone":  "8886797485",
+                                              "amount":  793
+                                          },
+                                          {
+                                              "name":  "Tsn Enterprises-Komerapudi",
+                                              "address":  "",
+                                              "phone":  "9441213727",
+                                              "amount":  399.99
+                                          },
+                                          {
+                                              "name":  "Sri Ganesh Sai Durga Traders-Tenali",
+                                              "address":  "",
+                                              "phone":  "9000395766",
+                                              "amount":  220
+                                          },
+                                          {
+                                              "name":  "Sri Meenakshi Enterprises- Kakumanu",
+                                              "address":  "",
+                                              "phone":  "9177070458",
+                                              "amount":  80
+                                          }
+                                      ]
+                    }
+}

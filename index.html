@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally Stock Dashboard — Cloud</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Tally Export Dashboard &nbsp;☁️ Cloud View</p>
+        <h1>Stock availability and prices</h1>
+        <p class="meta" id="sourceMeta">Loading stock data...</p>
+      </div>
+      <div class="actions">
+        <span class="cloudBadge" id="syncBadge">⏳ Loading...</span>
+        <button id="exportCsv" type="button" title="Download visible stock as CSV">Export CSV</button>
+        <button id="printPage" type="button" title="Print this report">Print</button>
+      </div>
+    </header>
+
+    <nav class="viewTabs" aria-label="Dashboard views">
+      <button class="tabButton active" type="button" data-view="stockView">Stock</button>
+      <button class="tabButton" type="button" data-view="salesView">Sales</button>
+      <button class="tabButton" type="button" data-view="duesView">Customer Dues</button>
+    </nav>
+
+    <section class="view active" id="stockView">
+    <section class="metrics" aria-label="Stock totals">
+      <article>
+        <span>Total items</span>
+        <strong id="totalItems">0</strong>
+      </article>
+      <article>
+        <span>Total quantity</span>
+        <strong id="totalQty">0</strong>
+      </article>
+      <article>
+        <span>Stock value</span>
+        <strong id="totalValue">₹0</strong>
+      </article>
+      <article>
+        <span>Low stock</span>
+        <strong id="lowStock">0</strong>
+      </article>
+    </section>
+
+    <section class="toolbar" aria-label="Filters">
+      <label class="searchBox">
+        <span>Search company</span>
+        <input id="companySearch" type="search" placeholder="Type or select company" list="companySuggestions">
+        <datalist id="companySuggestions"></datalist>
+      </label>
+      <label class="searchBox">
+        <span>Search item</span>
+        <input id="search" type="search" placeholder="Type item name" list="itemSuggestions">
+        <datalist id="itemSuggestions"></datalist>
+      </label>
+      <label>
+        <span>Low stock below</span>
+        <input id="lowLimit" type="number" min="0" step="1" value="5">
+      </label>
+      <label>
+        <span>Show</span>
+        <select id="stockFilter">
+          <option value="all">All stock</option>
+          <option value="available">Available only</option>
+          <option value="low">Low stock only</option>
+          <option value="empty">Zero / negative</option>
+        </select>
+      </label>
+      <label>
+        <span>Sort by</span>
+        <select id="sortBy">
+          <option value="value-desc">Highest value</option>
+          <option value="qty-asc">Lowest quantity</option>
+          <option value="qty-desc">Highest quantity</option>
+          <option value="name-asc">Item name</option>
+          <option value="rate-desc">Highest rate</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="contentGrid">
+      <section class="tablePanel" aria-label="Stock list">
+        <div class="panelHead">
+          <div>
+            <h2>Stock list</h2>
+            <p id="resultCount">0 items shown</p>
+          </div>
+          <div class="activeFilter" id="activeCompany">All companies</div>
+        </div>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Company</th>
+                <th class="num">Qty</th>
+                <th class="num">Rate</th>
+                <th class="num">Least sold</th>
+                <th class="num">Highest sold</th>
+                <th class="num">Value</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="stockRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="sidePanel" aria-label="Highlights">
+        <section>
+          <h2>Highest value</h2>
+          <div id="topValue" class="stack"></div>
+        </section>
+        <section>
+          <h2>Needs attention</h2>
+          <div id="attention" class="stack"></div>
+        </section>
+        <section class="guide">
+          <h2>☁️ Cloud View</h2>
+          <p>This is a read-only cloud view. Data is updated when someone runs <strong>Sync To Cloud</strong> from the local Tally PC.</p>
+        </section>
+      </aside>
+    </section>
+    </section>
+
+    <section class="view" id="salesView">
+      <section class="metrics" aria-label="Sales totals">
+        <article>
+          <span>Financial year</span>
+          <select id="salesYearFilter" class="metricSelect" aria-label="Select financial year"></select>
+        </article>
+        <article>
+          <span>Sales / turnover</span>
+          <strong id="salesTurnover">₹0</strong>
+        </article>
+        <article>
+          <span>Cash sales</span>
+          <strong id="cashSales">₹0</strong>
+        </article>
+        <article>
+          <span>Credit sales</span>
+          <strong id="creditSales">₹0</strong>
+        </article>
+      </section>
+
+      <section class="businessGrid">
+        <section class="tablePanel">
+          <div class="panelHead">
+            <div>
+              <h2>Financial year sales</h2>
+              <p id="salesUpdated">Loading sales data...</p>
+            </div>
+          </div>
+          <div class="tableWrap compact">
+            <table>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th class="num">Sales</th>
+                  <th class="num">Cash</th>
+                  <th class="num">Credit</th>
+                  <th class="num">Lines</th>
+                </tr>
+              </thead>
+              <tbody id="yearSalesRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="tablePanel">
+          <div class="panelHead">
+            <div>
+              <h2>Company-wise sales</h2>
+              <p id="companySalesCaption">Top companies for selected year</p>
+            </div>
+          </div>
+          <div class="tableWrap compact">
+            <table>
+              <thead><tr><th>Company</th><th class="num">Sales</th></tr></thead>
+              <tbody id="companySalesRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="tablePanel widePanel">
+        <div class="panelHead">
+          <div>
+            <h2>High-selling products</h2>
+            <p id="productSalesCaption">Product sales for selected year</p>
+          </div>
+        </div>
+        <div class="tableWrap compact">
+          <table>
+            <thead><tr><th>Product</th><th>Company</th><th class="num">Sales</th></tr></thead>
+            <tbody id="productSalesRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" id="duesView">
+      <section class="metrics" aria-label="Customer dues totals">
+        <article>
+          <span>Total to collect</span>
+          <strong id="duesTotal">₹0</strong>
+        </article>
+        <article>
+          <span>Customers</span>
+          <strong id="duesCustomers">0</strong>
+        </article>
+        <article>
+          <span>Highest due</span>
+          <strong id="highestDue">₹0</strong>
+        </article>
+        <article>
+          <span>Updated</span>
+          <strong id="duesUpdated">-</strong>
+        </article>
+      </section>
+
+      <section class="toolbar duesToolbar" aria-label="Customer search">
+        <label class="searchBox">
+          <span>Search customer</span>
+          <input id="customerSearch" type="search" placeholder="Type customer name, place, or phone">
+        </label>
+      </section>
+
+      <section class="tablePanel widePanel">
+        <div class="panelHead">
+          <div>
+            <h2>Customer credit money to collect</h2>
+            <p id="customerDueCount">0 customers shown</p>
+          </div>
+        </div>
+        <div class="tableWrap compact">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Place / address</th>
+                <th>Phone</th>
+                <th class="num">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="customerDueRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toastContainer"></div>
+  <script src="app.js"></script>
+</body>
+</html>
