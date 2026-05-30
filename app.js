@@ -3,6 +3,8 @@ let businessData = {};
 let visibleItems = [];
 let companyItems = [];
 let visibleCustomers = [];
+let lastCompanyQuery = null;
+let currentLimit = 80;
 
 const rupees = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 });
 const number = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 3 });
@@ -89,15 +91,24 @@ function getStatus(item, lowLimit) {
   return { text: 'Available', className: 'ok' };
 }
 
-function renderStock() {
+function renderStock(event) {
+  if (event && (event.type === 'input' || event.type === 'change')) {
+    currentLimit = 80;
+  }
+  
   const query = els.search.value.trim().toLowerCase();
   const companyQuery = els.companySearch.value.trim().toLowerCase();
   const lowLimit = Number(els.lowLimit.value || 0);
   const filter = els.stockFilter.value;
   const sortBy = els.sortBy.value;
 
-  companyItems = getCompanyItems(companyQuery);
-  refreshItemSuggestions(companyItems);
+  if (companyQuery !== lastCompanyQuery) {
+    companyItems = getCompanyItems(companyQuery);
+    refreshItemSuggestions(companyItems);
+    lastCompanyQuery = companyQuery;
+  } else if (!companyItems || companyItems.length === 0) {
+    companyItems = getCompanyItems(companyQuery);
+  }
 
   visibleItems = companyItems.filter(item => {
     const status = getStatus(item, lowLimit).className;
@@ -274,13 +285,16 @@ function updateMetrics(lowLimit, items) {
 }
 
 function updateTable(lowLimit) {
-  els.resultCount.textContent = `${number.format(visibleItems.length)} products shown`;
-  if (!visibleItems.length) {
+  const total = visibleItems.length;
+  const sliced = visibleItems.slice(0, currentLimit);
+  
+  els.resultCount.textContent = `${number.format(total)} products shown`;
+  if (!total) {
     els.rows.innerHTML = '<tr><td class="emptyState" colspan="8">No products matched your filters.</td></tr>';
     return;
   }
 
-  els.rows.innerHTML = visibleItems.map(item => {
+  let html = sliced.map(item => {
     const status = getStatus(item, lowLimit);
     return `
       <tr>
@@ -294,6 +308,27 @@ function updateTable(lowLimit) {
         <td><span class="status ${status.className}">${status.text}</span></td>
       </tr>`;
   }).join('');
+
+  if (total > currentLimit) {
+    html += `
+      <tr id="loadMoreRow">
+        <td colspan="8" style="text-align: center; padding: 18px;">
+          <button id="loadMoreBtn" type="button" style="min-height: 40px; background: var(--brand); color: white; border: 1px solid var(--brand-dark); padding: 0 28px; border-radius: 6px; font-weight: 700; cursor: pointer;">
+            Load More (+${number.format(total - currentLimit)} remaining)
+          </button>
+        </td>
+      </tr>`;
+  }
+
+  els.rows.innerHTML = html;
+
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      currentLimit += 150;
+      updateTable(lowLimit);
+    });
+  }
 }
 
 function updateHighlights(lowLimit, items) {
@@ -368,7 +403,10 @@ function escapeHtml(value) {
 
 ['input', 'change'].forEach(eventName => {
   els.search.addEventListener(eventName, renderStock);
-  els.companySearch.addEventListener(eventName, renderStock);
+  els.companySearch.addEventListener(eventName, (e) => {
+    // Force a datalist suggestion refresh if company input changed
+    renderStock(e);
+  });
   els.lowLimit.addEventListener(eventName, renderStock);
   els.stockFilter.addEventListener(eventName, renderStock);
   els.sortBy.addEventListener(eventName, renderStock);

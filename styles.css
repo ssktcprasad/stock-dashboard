@@ -322,12 +322,27 @@ tbody tr:hover { background: #f8fbfb; }
 }
 
 @media (max-width: 620px) {
-  .shell { width: min(100% - 18px, 1420px); padding-top: 16px; }
-  h1 { font-size: 25px; }
-  .metrics, .toolbar { grid-template-columns: 1fr; }
+  .shell { width: min(100% - 16px, 1420px); padding-top: 14px; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .viewTabs { gap: 4px; margin-bottom: 12px; }
+  .tabButton { flex: 1; min-height: 46px; font-size: 13px; text-align: center; padding: 0 8px; }
+  .metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .metrics article { padding: 12px; min-height: 84px; }
+  .metrics strong { font-size: 20px; }
+  
+  .toolbar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+  .toolbar label:nth-child(1),
+  .toolbar label:nth-child(2) {
+    grid-column: span 2;
+  }
   .actions, .actions button { width: 100%; }
-  .panelHead { align-items: flex-start; flex-direction: column; }
+  .panelHead { align-items: flex-start; flex-direction: column; gap: 8px; }
   .activeFilter { max-width: 100%; }
+  th, td { padding: 8px 10px; font-size: 12.5px; }
 }
 
 @media print {
