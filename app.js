@@ -53,20 +53,95 @@ const GITHUB_REPO = 'stock-dashboard';
 const STOCK_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/main/data/stock.json`;
 const BUSINESS_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/main/data/business.json`;
 
+function decryptText(base64Data, password) {
+  try {
+    const rawData = CryptoJS.enc.Base64.parse(base64Data);
+    if (rawData.sigBytes < 32) throw new Error('Invalid data length');
+    
+    const salt = CryptoJS.lib.WordArray.create(rawData.words.slice(0, 4), 16);
+    const iv = CryptoJS.lib.WordArray.create(rawData.words.slice(4, 8), 16);
+    const ciphertext = CryptoJS.lib.WordArray.create(rawData.words.slice(8), rawData.sigBytes - 32);
+    
+    const key = CryptoJS.PBKDF2(password, salt, {
+      keySize: 256/32,
+      iterations: 10000
+    });
+    
+    const decrypted = CryptoJS.AES.decrypt(
+      { ciphertext: ciphertext },
+      key,
+      { iv: iv, mode: CryptoJS.mode.CBC }
+    );
+    
+    const result = decrypted.toString(CryptoJS.enc.Utf8);
+    if (!result) throw new Error('Empty result');
+    return result;
+  } catch (e) {
+    throw new Error('Incorrect password');
+  }
+}
+
+let encryptedStockText = '';
+let encryptedBusinessText = '';
+
 async function loadData() {
   try {
-    els.sourceMeta.textContent = 'Fetching latest data from Cloud...';
+    els.sourceMeta.textContent = 'Fetching encrypted data from Cloud...';
     
     const stockResponse = await fetch(STOCK_URL, { cache: 'no-store' });
     if (!stockResponse.ok) throw new Error('Stock data not found in cloud');
-    stockData = await stockResponse.json();
+    encryptedStockText = (await stockResponse.text()).trim();
 
     const businessResponse = await fetch(BUSINESS_URL, { cache: 'no-store' });
-    businessData = businessResponse.ok ? await businessResponse.json() : {};
+    encryptedBusinessText = businessResponse.ok ? (await businessResponse.text()).trim() : '';
 
+    const savedPassword = sessionStorage.getItem('tally_password');
+    if (savedPassword) {
+      if (tryDecryptAndRender(savedPassword)) {
+        return;
+      }
+    }
+    
+    // Show password modal if not unlocked
+    document.getElementById('passwordModal').style.display = 'flex';
+    document.getElementById('passwordForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('dashboardPassword').value;
+      const errorDiv = document.getElementById('passwordError');
+      
+      if (tryDecryptAndRender(password)) {
+        sessionStorage.setItem('tally_password', password);
+        document.getElementById('passwordModal').style.display = 'none';
+        errorDiv.style.display = 'none';
+      } else {
+        errorDiv.style.display = 'block';
+        document.getElementById('dashboardPassword').value = '';
+        document.getElementById('dashboardPassword').focus();
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    els.sourceMeta.textContent = 'Failed to load cloud data. Make sure Sync to Cloud has been run at least once.';
+    els.rows.innerHTML = '<tr><td class="emptyState" colspan="8">No cloud data found yet.</td></tr>';
+  }
+}
+
+function tryDecryptAndRender(password) {
+  try {
+    const decStock = decryptText(encryptedStockText, password);
+    stockData = JSON.parse(decStock);
+    
+    if (encryptedBusinessText) {
+      const decBiz = decryptText(encryptedBusinessText, password);
+      businessData = JSON.parse(decBiz);
+    } else {
+      businessData = {};
+    }
+    
+    document.getElementById('passwordModal').style.display = 'none';
+    
     updateSuggestions();
     
-    // Initial render of stock metrics and highlights
     const lowLimit = Number(els.lowLimit.value || 0);
     companyItems = getCompanyItems('');
     updateMetrics(lowLimit, companyItems);
@@ -86,10 +161,11 @@ async function loadData() {
       els.syncBadge.style.fontSize = '12px';
       els.syncBadge.style.fontWeight = '700';
     }
-  } catch (error) {
-    console.error(error);
-    els.sourceMeta.textContent = 'Failed to load cloud data. Make sure Sync to Cloud has been run at least once.';
-    els.rows.innerHTML = '<tr><td class="emptyState" colspan="8">No cloud data found yet.</td></tr>';
+    return true;
+  } catch (err) {
+    console.warn('Decryption failed:', err.message);
+    sessionStorage.removeItem('tally_password');
+    return false;
   }
 }
 
