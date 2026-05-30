@@ -65,6 +65,14 @@ async function loadData() {
     businessData = businessResponse.ok ? await businessResponse.json() : {};
 
     updateSuggestions();
+    
+    // Initial render of stock metrics and highlights
+    const lowLimit = Number(els.lowLimit.value || 0);
+    companyItems = getCompanyItems('');
+    updateMetrics(lowLimit, companyItems);
+    updateHighlights(lowLimit, companyItems);
+    updateActiveCompany('');
+    
     renderStock();
     renderBusiness();
     
@@ -106,6 +114,11 @@ function renderStock(event) {
     companyItems = getCompanyItems(companyQuery);
     refreshItemSuggestions(companyItems);
     lastCompanyQuery = companyQuery;
+    
+    // Updates that only depend on the selected company
+    updateMetrics(lowLimit, companyItems);
+    updateHighlights(lowLimit, companyItems);
+    updateActiveCompany(companyQuery);
   } else if (!companyItems || companyItems.length === 0) {
     companyItems = getCompanyItems(companyQuery);
   }
@@ -129,10 +142,7 @@ function renderStock(event) {
   });
 
   updateMeta();
-  updateMetrics(lowLimit, companyItems);
   updateTable(lowLimit);
-  updateHighlights(lowLimit, companyItems);
-  updateActiveCompany(companyQuery);
 }
 
 const historicalSalesData = {};
@@ -401,17 +411,33 @@ function escapeHtml(value) {
   }[char]));
 }
 
-['input', 'change'].forEach(eventName => {
-  els.search.addEventListener(eventName, renderStock);
-  els.companySearch.addEventListener(eventName, (e) => {
-    // Force a datalist suggestion refresh if company input changed
-    renderStock(e);
-  });
-  els.lowLimit.addEventListener(eventName, renderStock);
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
+const debouncedRenderStock = debounce((e) => renderStock(e), 150);
+
+els.search.addEventListener('input', debouncedRenderStock);
+els.companySearch.addEventListener('input', debouncedRenderStock);
+
+['change'].forEach(eventName => {
   els.stockFilter.addEventListener(eventName, renderStock);
   els.sortBy.addEventListener(eventName, renderStock);
-  els.customerSearch.addEventListener(eventName, renderCustomerDues);
+  els.companySearch.addEventListener(eventName, renderStock);
 });
+
+els.lowLimit.addEventListener('input', (e) => {
+  const lowLimit = Number(els.lowLimit.value || 0);
+  updateMetrics(lowLimit, companyItems);
+  updateHighlights(lowLimit, companyItems);
+  renderStock(e);
+});
+
+els.customerSearch.addEventListener('input', debounce(() => renderCustomerDues(), 150));
 
 els.salesYearFilter.addEventListener('change', renderSelectedSalesYear);
 
