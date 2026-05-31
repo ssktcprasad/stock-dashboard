@@ -452,3 +452,9 @@ button.spinning::before {
   font-size: 13px;
 }
 
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+

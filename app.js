@@ -356,10 +356,10 @@ function updateTable(lowLimit) {
         <td>${escapeHtml(companyNameOf(item))}</td>
         <td class="num">${escapeHtml(item.quantityText || number.format(item.quantity))}</td>
         <td class="num">${escapeHtml(item.rateText || rupees.format(item.rate))}</td>
-        <td class="num">${formatOptionalMoney(item.leastSoldPrice)}</td>
-        <td class="num">${formatOptionalMoney(item.highestSoldPrice)}</td>
-        <td class="num">${rupees.format(item.value)}</td>
-        <td class="num">18%</td>
+        <td class="num hide-mobile">18%</td>
+        <td class="num">${rupees.format(item.rate * 1.18)}</td>
+        <td class="num">${formatOptionalMoney(item.leastSoldPrice ? item.leastSoldPrice * 1.18 : null)}</td>
+        <td class="num">${formatOptionalMoney(item.highestSoldPrice ? item.highestSoldPrice * 1.18 : null)}</td>
         <td class="num">${rupees.format(item.value * 1.18)}</td>
         <td><span class="status ${status.className}">${status.text}</span></td>
       </tr>`;
@@ -412,15 +412,15 @@ function exportCsv() {
   const activeView = document.querySelector('.view.active')?.id;
   const rows = activeView === 'duesView'
     ? [['Customer', 'Address', 'Phone', 'Amount'], ...visibleCustomers.map(c => [c.name, c.address || '', c.phone || '', c.amount])]
-    : [['Item', 'Company', 'Quantity', 'Rate', 'Least Sold Price', 'Highest Sold Price', 'Value', 'GST %', 'Final Value (with GST)'], ...visibleItems.map(item => [
+    : [['Item', 'Company', 'Quantity', 'Rate', 'GST %', 'Final Rate (with GST)', 'Least Sold Price (with GST)', 'Highest Sold Price (with GST)', 'Value (with GST)'], ...visibleItems.map(item => [
       item.name,
       companyNameOf(item),
       item.quantityText || item.quantity,
       item.rateText || item.rate,
-      item.leastSoldPrice ?? '',
-      item.highestSoldPrice ?? '',
-      item.value,
       '18%',
+      (item.rate * 1.18).toFixed(2),
+      item.leastSoldPrice ? (item.leastSoldPrice * 1.18).toFixed(2) : '',
+      item.highestSoldPrice ? (item.highestSoldPrice * 1.18).toFixed(2) : '',
       (item.value * 1.18).toFixed(2)
     ])];
 
