@@ -55,10 +55,10 @@
         <input id="companySearch" type="search" placeholder="Type or select company" list="companySuggestions">
         <datalist id="companySuggestions"></datalist>
       </label>
-      <label class="searchBox">
+      <label class="searchBox" style="position: relative;">
         <span>Search item</span>
-        <input id="search" type="search" placeholder="Type item name" list="itemSuggestions">
-        <datalist id="itemSuggestions"></datalist>
+        <input id="search" type="search" placeholder="Type item name" autocomplete="off">
+        <div id="itemSuggestions" class="suggestions-dropdown" style="display: none;"></div>
       </label>
       <label>
         <span>Low stock below</span>

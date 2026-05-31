@@ -308,11 +308,24 @@ function getCompanyItems(companyQuery) {
 
 function refreshItemSuggestions(items, query = '') {
   const cleanQuery = query.trim().toLowerCase();
+  if (!cleanQuery) {
+    els.itemSuggestions.style.display = 'none';
+    els.itemSuggestions.innerHTML = '';
+    return;
+  }
   const filtered = items.filter(item => {
-    return !cleanQuery || item.name.toLowerCase().startsWith(cleanQuery);
+    return item.name.toLowerCase().startsWith(cleanQuery);
   });
   const itemNames = uniqueSorted(filtered.map(item => item.name).filter(Boolean));
-  els.itemSuggestions.innerHTML = itemNames.slice(0, 100).map(name => `<option value="${escapeHtml(name)}"></option>`).join('');
+  if (itemNames.length === 0) {
+    els.itemSuggestions.style.display = 'none';
+    els.itemSuggestions.innerHTML = '';
+    return;
+  }
+  els.itemSuggestions.innerHTML = itemNames.slice(0, 100).map(name => `
+    <div class="suggestion-item" data-value="${escapeHtml(name)}">${escapeHtml(name)}</div>
+  `).join('');
+  els.itemSuggestions.style.display = 'block';
 }
 
 function updateActiveCompany(companyQuery) {
@@ -501,5 +514,28 @@ document.querySelectorAll('.tabButton').forEach(button => {
 
 els.exportCsv.addEventListener('click', exportCsv);
 els.printPage.addEventListener('click', () => window.print());
+
+els.itemSuggestions.addEventListener('click', (e) => {
+  const item = e.target.closest('.suggestion-item');
+  if (item) {
+    const value = item.dataset.value;
+    els.search.value = value;
+    els.itemSuggestions.style.display = 'none';
+    renderStock();
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!els.search.contains(e.target) && !els.itemSuggestions.contains(e.target)) {
+    els.itemSuggestions.style.display = 'none';
+  }
+});
+
+els.search.addEventListener('focus', () => {
+  const query = els.search.value.trim();
+  if (query) {
+    refreshItemSuggestions(companyItems, query);
+  }
+});
 
 loadData();
