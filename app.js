@@ -156,7 +156,6 @@ function renderStock(event) {
 
   if (companyQuery !== lastCompanyQuery) {
     companyItems = getCompanyItems(companyQuery);
-    refreshItemSuggestions(companyItems);
     lastCompanyQuery = companyQuery;
     
     // Updates that only depend on the selected company
@@ -167,9 +166,12 @@ function renderStock(event) {
     companyItems = getCompanyItems(companyQuery);
   }
 
+  // Dynamically update search autocomplete suggestions
+  refreshItemSuggestions(companyItems, query);
+
   visibleItems = companyItems.filter(item => {
     const status = getStatus(item, lowLimit).className;
-    const matchesSearch = !query || item.name.toLowerCase().includes(query);
+    const matchesSearch = !query || item.name.toLowerCase().startsWith(query);
     const matchesFilter = filter === 'all'
       || (filter === 'available' && item.quantity > 0)
       || (filter === 'low' && status === 'low')
@@ -286,7 +288,7 @@ function updateSuggestions() {
   const items = stockData.items || [];
   const companies = uniqueSorted(items.map(item => companyNameOf(item)).filter(Boolean));
   els.companySuggestions.innerHTML = companies.map(name => `<option value="${escapeHtml(name)}"></option>`).join('');
-  refreshItemSuggestions(items);
+  refreshItemSuggestions(items, '');
 }
 
 function uniqueSorted(values) {
@@ -304,9 +306,13 @@ function getCompanyItems(companyQuery) {
   return items.filter(item => companyNameOf(item).toLowerCase().includes(companyQuery));
 }
 
-function refreshItemSuggestions(items) {
-  const itemNames = uniqueSorted(items.map(item => item.name).filter(Boolean));
-  els.itemSuggestions.innerHTML = itemNames.slice(0, 2000).map(name => `<option value="${escapeHtml(name)}"></option>`).join('');
+function refreshItemSuggestions(items, query = '') {
+  const cleanQuery = query.trim().toLowerCase();
+  const filtered = items.filter(item => {
+    return !cleanQuery || item.name.toLowerCase().startsWith(cleanQuery);
+  });
+  const itemNames = uniqueSorted(filtered.map(item => item.name).filter(Boolean));
+  els.itemSuggestions.innerHTML = itemNames.slice(0, 100).map(name => `<option value="${escapeHtml(name)}"></option>`).join('');
 }
 
 function updateActiveCompany(companyQuery) {
