@@ -229,16 +229,16 @@ async function renderSelectedSalesYear() {
   const current = years.find(year => year.financialYear === selectedYear) || {};
   const yearData = businessData.salesByYear?.[selectedYear] || businessData.salesByYear?.[Object.keys(businessData.salesByYear || {})[0]] || {};
 
-  els.salesTurnover.textContent = rupees.format(current.turnover || current.sales || 0);
-  els.cashSales.textContent = rupees.format(current.cashSales || 0);
-  els.creditSales.textContent = rupees.format(current.creditSales || 0);
+  els.salesTurnover.textContent = rupees.format((current.turnover || current.sales || 0) * 1.18);
+  els.cashSales.textContent = rupees.format((current.cashSales || 0) * 1.18);
+  els.creditSales.textContent = rupees.format((current.creditSales || 0) * 1.18);
   els.salesUpdated.textContent = businessData.updatedAt ? `Updated ${businessData.updatedAt}` : 'Data synced from Tally.';
 
   document.querySelector('#companySalesCaption').textContent = `Top companies in ${selectedYear}`;
   document.querySelector('#productSalesCaption').textContent = `High-selling products in ${selectedYear}`;
 
   els.companySalesRows.innerHTML = asArray(yearData.companySales).length
-    ? asArray(yearData.companySales).map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="num">${rupees.format(row.amount || 0)}</td></tr>`).join('')
+    ? asArray(yearData.companySales).map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="num">${rupees.format((row.amount || 0) * 1.18)}</td></tr>`).join('')
     : emptyRow(2, 'No company sales found for this year.');
 
   els.productSalesRows.innerHTML = asArray(yearData.productSales).length
@@ -246,7 +246,7 @@ async function renderSelectedSalesYear() {
       <tr>
         <td>${escapeHtml(row.name)}</td>
         <td>${escapeHtml(row.companyName || '')}</td>
-        <td class="num">${rupees.format(row.amount || 0)}</td>
+        <td class="num">${rupees.format((row.amount || 0) * 1.18)}</td>
       </tr>`).join('')
     : emptyRow(3, 'No product sales found for this year.');
 }
@@ -255,9 +255,9 @@ function renderFinancialYearRows(years) {
   els.yearSalesRows.innerHTML = years.length ? years.map(year => `
     <tr>
       <td>${escapeHtml(year.financialYear)}</td>
-      <td class="num">${rupees.format(year.turnover || year.sales || 0)}</td>
-      <td class="num">${rupees.format(year.cashSales || 0)}</td>
-      <td class="num">${rupees.format(year.creditSales || 0)}</td>
+      <td class="num">${rupees.format((year.turnover || year.sales || 0) * 1.18)}</td>
+      <td class="num">${rupees.format((year.cashSales || 0) * 1.18)}</td>
+      <td class="num">${rupees.format((year.creditSales || 0) * 1.18)}</td>
       <td class="num">${number.format(year.productLines || 0)}</td>
     </tr>`).join('') : emptyRow(5, 'No sales data found.');
 }
@@ -327,7 +327,7 @@ function updateMeta() {
 function updateMetrics(lowLimit, items) {
   const totals = items.reduce((acc, item) => {
     acc.qty += item.quantity || 0;
-    acc.value += item.value || 0;
+    acc.value += (item.value || 0) * 1.18;
     if (item.quantity > 0 && item.quantity <= lowLimit) acc.low += 1;
     return acc;
   }, { qty: 0, value: 0, low: 0 });
@@ -355,10 +355,10 @@ function updateTable(lowLimit) {
         <td>${escapeHtml(item.name)}</td>
         <td>${escapeHtml(companyNameOf(item))}</td>
         <td class="num">${escapeHtml(item.quantityText || number.format(item.quantity))}</td>
-        <td class="num">${escapeHtml(item.rateText || rupees.format(item.rate))}</td>
-        <td class="num">${formatOptionalMoney(item.leastSoldPrice)}</td>
-        <td class="num">${formatOptionalMoney(item.highestSoldPrice)}</td>
-        <td class="num">${rupees.format(item.value)}</td>
+        <td class="num">${rupees.format(item.rate * 1.18)}</td>
+        <td class="num">${formatOptionalMoney(item.leastSoldPrice ? item.leastSoldPrice * 1.18 : null)}</td>
+        <td class="num">${formatOptionalMoney(item.highestSoldPrice ? item.highestSoldPrice * 1.18 : null)}</td>
+        <td class="num">${rupees.format(item.value * 1.18)}</td>
         <td><span class="status ${status.className}">${status.text}</span></td>
       </tr>`;
   }).join('');
@@ -390,11 +390,11 @@ function updateHighlights(lowLimit, items) {
   const attention = [...items].filter(item => item.quantity <= lowLimit).sort((a, b) => a.quantity - b.quantity).slice(0, 5);
 
   els.topValue.innerHTML = byValue.length
-    ? cards(byValue, item => `${rupees.format(item.value)} | Qty ${number.format(item.quantity)}`)
+    ? cards(byValue, item => `${rupees.format(item.value * 1.18)} | Qty ${number.format(item.quantity)}`)
     : '<p class="meta">No products in this company.</p>';
 
   els.attention.innerHTML = attention.length
-    ? cards(attention, item => `Qty ${number.format(item.quantity)} | Rate ${rupees.format(item.rate)}`)
+    ? cards(attention, item => `Qty ${number.format(item.quantity)} | Rate ${rupees.format(item.rate * 1.18)}`)
     : '<p class="meta">No low-stock products at this limit.</p>';
 }
 
@@ -410,14 +410,14 @@ function exportCsv() {
   const activeView = document.querySelector('.view.active')?.id;
   const rows = activeView === 'duesView'
     ? [['Customer', 'Address', 'Phone', 'Amount'], ...visibleCustomers.map(c => [c.name, c.address || '', c.phone || '', c.amount])]
-    : [['Item', 'Company', 'Quantity', 'Rate', 'Least Sold Price', 'Highest Sold Price', 'Value'], ...visibleItems.map(item => [
+    : [['Item', 'Company', 'Quantity', 'Rate (with GST)', 'Least Sold Price (with GST)', 'Highest Sold Price (with GST)', 'Value (with GST)'], ...visibleItems.map(item => [
       item.name,
       companyNameOf(item),
       item.quantityText || item.quantity,
-      item.rateText || item.rate,
-      item.leastSoldPrice ?? '',
-      item.highestSoldPrice ?? '',
-      item.value
+      (item.rate * 1.18).toFixed(2),
+      item.leastSoldPrice ? (item.leastSoldPrice * 1.18).toFixed(2) : '',
+      item.highestSoldPrice ? (item.highestSoldPrice * 1.18).toFixed(2) : '',
+      (item.value * 1.18).toFixed(2)
     ])];
 
   const csv = rows.map(row => row.map(cell => `"${String(cell).replaceAll('"', '""')}"`).join(',')).join('\n');
