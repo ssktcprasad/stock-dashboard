@@ -81,65 +81,34 @@ function decryptText(base64Data, password) {
   }
 }
 
-let encryptedStockText = '';
-let encryptedBusinessText = '';
-
 async function loadData() {
   try {
-    els.sourceMeta.textContent = 'Fetching encrypted data from Cloud...';
+    els.sourceMeta.textContent = 'Fetching and decrypting data from Cloud...';
     
     const stockResponse = await fetch(STOCK_URL, { cache: 'no-store' });
     if (!stockResponse.ok) throw new Error('Stock data not found in cloud');
-    encryptedStockText = (await stockResponse.text()).trim();
-
-    const businessResponse = await fetch(BUSINESS_URL, { cache: 'no-store' });
-    encryptedBusinessText = businessResponse.ok ? (await businessResponse.text()).trim() : '';
-
-    const savedPassword = sessionStorage.getItem('tally_password');
-    if (savedPassword) {
-      if (tryDecryptAndRender(savedPassword)) {
-        return;
-      }
-    }
-    
-    // Show password modal if not unlocked
-    document.getElementById('passwordModal').style.display = 'flex';
-    document.getElementById('passwordForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const password = document.getElementById('dashboardPassword').value;
-      const errorDiv = document.getElementById('passwordError');
-      
-      if (tryDecryptAndRender(password)) {
-        sessionStorage.setItem('tally_password', password);
-        document.getElementById('passwordModal').style.display = 'none';
-        errorDiv.style.display = 'none';
-      } else {
-        errorDiv.style.display = 'block';
-        document.getElementById('dashboardPassword').value = '';
-        document.getElementById('dashboardPassword').focus();
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    els.sourceMeta.textContent = 'Failed to load cloud data. Make sure Sync to Cloud has been run at least once.';
-    els.rows.innerHTML = '<tr><td class="emptyState" colspan="8">No cloud data found yet.</td></tr>';
-  }
-}
-
-function tryDecryptAndRender(password) {
-  try {
-    const decStock = decryptText(encryptedStockText, password);
+    const encryptedStockText = (await stockResponse.text()).trim();
+    const decStock = decryptText(encryptedStockText, 'ssktc');
     stockData = JSON.parse(decStock);
-    
-    if (encryptedBusinessText) {
-      const decBiz = decryptText(encryptedBusinessText, password);
-      businessData = JSON.parse(decBiz);
-    } else {
+
+    try {
+      const businessResponse = await fetch(BUSINESS_URL, { cache: 'no-store' });
+      if (businessResponse.ok) {
+        const encryptedBusinessText = (await businessResponse.text()).trim();
+        if (encryptedBusinessText) {
+          const decBiz = decryptText(encryptedBusinessText, 'ssktc');
+          businessData = JSON.parse(decBiz);
+        } else {
+          businessData = {};
+        }
+      } else {
+        businessData = {};
+      }
+    } catch (bizErr) {
+      console.warn('Failed to load or decrypt business data:', bizErr);
       businessData = {};
     }
-    
-    document.getElementById('passwordModal').style.display = 'none';
-    
+
     updateSuggestions();
     
     const lowLimit = Number(els.lowLimit.value || 0);
@@ -161,11 +130,10 @@ function tryDecryptAndRender(password) {
       els.syncBadge.style.fontSize = '12px';
       els.syncBadge.style.fontWeight = '700';
     }
-    return true;
-  } catch (err) {
-    console.warn('Decryption failed:', err.message);
-    sessionStorage.removeItem('tally_password');
-    return false;
+  } catch (error) {
+    console.error(error);
+    els.sourceMeta.textContent = 'Failed to load cloud data. Make sure Sync to Cloud has been run at least once.';
+    els.rows.innerHTML = '<tr><td class="emptyState" colspan="8">No cloud data found yet or decryption failed.</td></tr>';
   }
 }
 
