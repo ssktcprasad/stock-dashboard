@@ -493,3 +493,13 @@ button.spinning::before {
   color: var(--brand);
 }
 
+.pay-red {
+  color: var(--danger) !important;
+  font-weight: 700;
+}
+
+.collect-green {
+  color: var(--good) !important;
+  font-weight: 700;
+}
+

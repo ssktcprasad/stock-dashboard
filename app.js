@@ -47,9 +47,9 @@ const els = {
   customerDueCount: document.querySelector('#customerDueCount'),
   syncBadge: document.querySelector('#syncBadge'),
   creditorsTotal: document.querySelector('#creditorsTotal'),
+  creditorsPrepaid: document.querySelector('#creditorsPrepaid'),
+  creditorsNet: document.querySelector('#creditorsNet'),
   creditorsCount: document.querySelector('#creditorsCount'),
-  highestCreditor: document.querySelector('#highestCreditor'),
-  creditorsUpdated: document.querySelector('#creditorsUpdated'),
   creditorSearch: document.querySelector('#creditorSearch'),
   creditorDueRows: document.querySelector('#creditorDueRows'),
   creditorDueCount: document.querySelector('#creditorDueCount')
@@ -216,10 +216,23 @@ async function renderBusiness() {
   els.duesUpdated.textContent = businessData.updatedAt ? businessData.updatedAt.split(' ')[0] : '-';
   renderCustomerDues();
 
-  els.creditorsTotal.textContent = rupees.format(businessData.payables?.total || 0);
+  const totalPayable = businessData.payables?.totalPayable || 0;
+  const totalPrepaid = businessData.payables?.totalPrepaid || 0;
+  const netOut = totalPayable - totalPrepaid;
+
+  els.creditorsTotal.textContent = rupees.format(totalPayable);
+  els.creditorsPrepaid.textContent = rupees.format(totalPrepaid);
+  els.creditorsNet.textContent = rupees.format(netOut);
+  
+  if (netOut > 0) {
+    els.creditorsNet.className = 'pay-red';
+  } else if (netOut < 0) {
+    els.creditorsNet.className = 'collect-green';
+  } else {
+    els.creditorsNet.className = '';
+  }
+
   els.creditorsCount.textContent = number.format(businessData.payables?.creditorCount || creditors.length || 0);
-  els.highestCreditor.textContent = rupees.format(creditors[0]?.amount || 0);
-  els.creditorsUpdated.textContent = businessData.updatedAt ? businessData.updatedAt.split(' ')[0] : '-';
   renderCreditors();
 }
 
@@ -309,13 +322,18 @@ function renderCreditors() {
 
   els.creditorDueCount.textContent = `${number.format(visibleCreditors.length)} creditors shown`;
   els.creditorDueRows.innerHTML = visibleCreditors.length
-    ? visibleCreditors.map(creditor => `
-      <tr>
-        <td>${escapeHtml(creditor.name)}</td>
-        <td>${escapeHtml(creditor.address || '-')}</td>
-        <td>${escapeHtml(creditor.phone || '-')}</td>
-        <td class="num">${rupees.format(creditor.amount || 0)}</td>
-      </tr>`).join('')
+    ? visibleCreditors.map(creditor => {
+        const isDebit = creditor.balanceType === 'debit';
+        const amtClass = isDebit ? 'collect-green' : 'pay-red';
+        const suffix = isDebit ? ' Dr' : ' Cr';
+        return `
+          <tr>
+            <td>${escapeHtml(creditor.name)}</td>
+            <td>${escapeHtml(creditor.address || '-')}</td>
+            <td>${escapeHtml(creditor.phone || '-')}</td>
+            <td class="num ${amtClass}">${rupees.format(creditor.amount || 0)}${suffix}</td>
+          </tr>`;
+      }).join('')
     : emptyRow(4, 'No creditors matched your search.');
 }
 
@@ -469,7 +487,7 @@ function exportCsv() {
     rows = [['Customer', 'Address', 'Phone', 'Amount'], ...visibleCustomers.map(c => [c.name, c.address || '', c.phone || '', c.amount])];
     filename = 'customer-dues-export.csv';
   } else if (activeView === 'creditorsView') {
-    rows = [['Creditor', 'Address', 'Phone', 'Amount'], ...visibleCreditors.map(c => [c.name, c.address || '', c.phone || '', c.amount])];
+    rows = [['Creditor', 'Address', 'Phone', 'Amount', 'Type'], ...visibleCreditors.map(c => [c.name, c.address || '', c.phone || '', c.amount, c.balanceType === 'debit' ? 'Debit (Prepaid)' : 'Credit (Payable)'])];
     filename = 'creditor-dues-export.csv';
   } else {
     rows = [['Item', 'Company', 'Quantity', 'Rate', 'GST %', 'Final Rate (with GST)', 'Least Sold Price (with GST)', 'Highest Sold Price (with GST)', 'Value (with GST)'], ...visibleItems.map(item => [
