@@ -344,7 +344,7 @@ function updateTable(lowLimit) {
   
   els.resultCount.textContent = `${number.format(total)} products shown`;
   if (!total) {
-    els.rows.innerHTML = '<tr><td class="emptyState" colspan="8">No products matched your filters.</td></tr>';
+    els.rows.innerHTML = '<tr><td class="emptyState" colspan="10">No products matched your filters.</td></tr>';
     return;
   }
 
@@ -355,9 +355,11 @@ function updateTable(lowLimit) {
         <td>${escapeHtml(item.name)}</td>
         <td>${escapeHtml(companyNameOf(item))}</td>
         <td class="num">${escapeHtml(item.quantityText || number.format(item.quantity))}</td>
-        <td class="num">${rupees.format(item.rate * 1.18)}</td>
-        <td class="num">${formatOptionalMoney(item.leastSoldPrice ? item.leastSoldPrice * 1.18 : null)}</td>
-        <td class="num">${formatOptionalMoney(item.highestSoldPrice ? item.highestSoldPrice * 1.18 : null)}</td>
+        <td class="num">${escapeHtml(item.rateText || rupees.format(item.rate))}</td>
+        <td class="num">${formatOptionalMoney(item.leastSoldPrice)}</td>
+        <td class="num">${formatOptionalMoney(item.highestSoldPrice)}</td>
+        <td class="num">${rupees.format(item.value)}</td>
+        <td class="num">18%</td>
         <td class="num">${rupees.format(item.value * 1.18)}</td>
         <td><span class="status ${status.className}">${status.text}</span></td>
       </tr>`;
@@ -366,7 +368,7 @@ function updateTable(lowLimit) {
   if (total > currentLimit) {
     html += `
       <tr id="loadMoreRow">
-        <td colspan="8" style="text-align: center; padding: 18px;">
+        <td colspan="10" style="text-align: center; padding: 18px;">
           <button id="loadMoreBtn" type="button" style="min-height: 40px; background: var(--brand); color: white; border: 1px solid var(--brand-dark); padding: 0 28px; border-radius: 6px; font-weight: 700; cursor: pointer;">
             Load More (+${number.format(total - currentLimit)} remaining)
           </button>
@@ -394,7 +396,7 @@ function updateHighlights(lowLimit, items) {
     : '<p class="meta">No products in this company.</p>';
 
   els.attention.innerHTML = attention.length
-    ? cards(attention, item => `Qty ${number.format(item.quantity)} | Rate ${rupees.format(item.rate * 1.18)}`)
+    ? cards(attention, item => `Qty ${number.format(item.quantity)} | Rate ${rupees.format(item.rate)}`)
     : '<p class="meta">No low-stock products at this limit.</p>';
 }
 
@@ -410,13 +412,15 @@ function exportCsv() {
   const activeView = document.querySelector('.view.active')?.id;
   const rows = activeView === 'duesView'
     ? [['Customer', 'Address', 'Phone', 'Amount'], ...visibleCustomers.map(c => [c.name, c.address || '', c.phone || '', c.amount])]
-    : [['Item', 'Company', 'Quantity', 'Rate (with GST)', 'Least Sold Price (with GST)', 'Highest Sold Price (with GST)', 'Value (with GST)'], ...visibleItems.map(item => [
+    : [['Item', 'Company', 'Quantity', 'Rate', 'Least Sold Price', 'Highest Sold Price', 'Value', 'GST %', 'Final Value (with GST)'], ...visibleItems.map(item => [
       item.name,
       companyNameOf(item),
       item.quantityText || item.quantity,
-      (item.rate * 1.18).toFixed(2),
-      item.leastSoldPrice ? (item.leastSoldPrice * 1.18).toFixed(2) : '',
-      item.highestSoldPrice ? (item.highestSoldPrice * 1.18).toFixed(2) : '',
+      item.rateText || item.rate,
+      item.leastSoldPrice ?? '',
+      item.highestSoldPrice ?? '',
+      item.value,
+      '18%',
       (item.value * 1.18).toFixed(2)
     ])];
 
