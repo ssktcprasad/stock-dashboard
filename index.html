@@ -26,6 +26,7 @@
       <button class="tabButton active" type="button" data-view="stockView">Stock</button>
       <button class="tabButton" type="button" data-view="salesView">Sales</button>
       <button class="tabButton" type="button" data-view="duesView">Customer Dues</button>
+      <button class="tabButton" type="button" data-view="creditorsView">Creditors</button>
     </nav>
 
     <section class="view active" id="stockView">
@@ -252,6 +253,56 @@
               </tr>
             </thead>
             <tbody id="customerDueRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" id="creditorsView">
+      <section class="metrics" aria-label="Creditor dues totals">
+        <article>
+          <span>Total to pay</span>
+          <strong id="creditorsTotal">₹0</strong>
+        </article>
+        <article>
+          <span>Creditors</span>
+          <strong id="creditorsCount">0</strong>
+        </article>
+        <article>
+          <span>Highest creditor</span>
+          <strong id="highestCreditor">₹0</strong>
+        </article>
+        <article>
+          <span>Updated</span>
+          <strong id="creditorsUpdated">-</strong>
+        </article>
+      </section>
+
+      <section class="toolbar duesToolbar" aria-label="Creditor search">
+        <label class="searchBox">
+          <span>Search creditor</span>
+          <input id="creditorSearch" type="search" placeholder="Type creditor name, place, or phone">
+        </label>
+      </section>
+
+      <section class="tablePanel widePanel">
+        <div class="panelHead">
+          <div>
+            <h2>Money to pay to Sundry Creditors</h2>
+            <p id="creditorDueCount">0 creditors shown</p>
+          </div>
+        </div>
+        <div class="tableWrap compact">
+          <table>
+            <thead>
+              <tr>
+                <th>Creditor</th>
+                <th>Place / address</th>
+                <th>Phone</th>
+                <th class="num">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="creditorDueRows"></tbody>
           </table>
         </div>
       </section>

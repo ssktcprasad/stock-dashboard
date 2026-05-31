@@ -3,6 +3,7 @@ let businessData = {};
 let visibleItems = [];
 let companyItems = [];
 let visibleCustomers = [];
+let visibleCreditors = [];
 let lastCompanyQuery = null;
 let currentLimit = 80;
 
@@ -44,7 +45,14 @@ const els = {
   customerSearch: document.querySelector('#customerSearch'),
   customerDueRows: document.querySelector('#customerDueRows'),
   customerDueCount: document.querySelector('#customerDueCount'),
-  syncBadge: document.querySelector('#syncBadge')
+  syncBadge: document.querySelector('#syncBadge'),
+  creditorsTotal: document.querySelector('#creditorsTotal'),
+  creditorsCount: document.querySelector('#creditorsCount'),
+  highestCreditor: document.querySelector('#highestCreditor'),
+  creditorsUpdated: document.querySelector('#creditorsUpdated'),
+  creditorSearch: document.querySelector('#creditorSearch'),
+  creditorDueRows: document.querySelector('#creditorDueRows'),
+  creditorDueCount: document.querySelector('#creditorDueCount')
 };
 
 // URL endpoints pointing to your public GitHub repo raw files
@@ -196,6 +204,7 @@ const historicalSalesData = {};
 async function renderBusiness() {
   const years = asArray(businessData.financialYears);
   const customers = asArray(businessData.receivables?.customers);
+  const creditors = asArray(businessData.payables?.creditors);
   
   await populateSalesYearFilter();
   await renderSelectedSalesYear();
@@ -206,6 +215,12 @@ async function renderBusiness() {
   els.highestDue.textContent = rupees.format(customers[0]?.amount || 0);
   els.duesUpdated.textContent = businessData.updatedAt ? businessData.updatedAt.split(' ')[0] : '-';
   renderCustomerDues();
+
+  els.creditorsTotal.textContent = rupees.format(businessData.payables?.total || 0);
+  els.creditorsCount.textContent = number.format(businessData.payables?.creditorCount || creditors.length || 0);
+  els.highestCreditor.textContent = rupees.format(creditors[0]?.amount || 0);
+  els.creditorsUpdated.textContent = businessData.updatedAt ? businessData.updatedAt.split(' ')[0] : '-';
+  renderCreditors();
 }
 
 async function populateSalesYearFilter() {
@@ -282,6 +297,26 @@ function renderCustomerDues() {
         <td class="num">${rupees.format(customer.amount || 0)}</td>
       </tr>`).join('')
     : emptyRow(4, 'No customers matched your search.');
+}
+
+function renderCreditors() {
+  const query = els.creditorSearch.value.trim().toLowerCase();
+  const creditors = asArray(businessData.payables?.creditors);
+  visibleCreditors = creditors.filter(creditor => {
+    const text = `${creditor.name || ''} ${creditor.address || ''} ${creditor.phone || ''}`.toLowerCase();
+    return !query || text.includes(query);
+  });
+
+  els.creditorDueCount.textContent = `${number.format(visibleCreditors.length)} creditors shown`;
+  els.creditorDueRows.innerHTML = visibleCreditors.length
+    ? visibleCreditors.map(creditor => `
+      <tr>
+        <td>${escapeHtml(creditor.name)}</td>
+        <td>${escapeHtml(creditor.address || '-')}</td>
+        <td>${escapeHtml(creditor.phone || '-')}</td>
+        <td class="num">${rupees.format(creditor.amount || 0)}</td>
+      </tr>`).join('')
+    : emptyRow(4, 'No creditors matched your search.');
 }
 
 function updateSuggestions() {
@@ -429,9 +464,15 @@ function cards(items, subtitle) {
 
 function exportCsv() {
   const activeView = document.querySelector('.view.active')?.id;
-  const rows = activeView === 'duesView'
-    ? [['Customer', 'Address', 'Phone', 'Amount'], ...visibleCustomers.map(c => [c.name, c.address || '', c.phone || '', c.amount])]
-    : [['Item', 'Company', 'Quantity', 'Rate', 'GST %', 'Final Rate (with GST)', 'Least Sold Price (with GST)', 'Highest Sold Price (with GST)', 'Value (with GST)'], ...visibleItems.map(item => [
+  let rows, filename;
+  if (activeView === 'duesView') {
+    rows = [['Customer', 'Address', 'Phone', 'Amount'], ...visibleCustomers.map(c => [c.name, c.address || '', c.phone || '', c.amount])];
+    filename = 'customer-dues-export.csv';
+  } else if (activeView === 'creditorsView') {
+    rows = [['Creditor', 'Address', 'Phone', 'Amount'], ...visibleCreditors.map(c => [c.name, c.address || '', c.phone || '', c.amount])];
+    filename = 'creditor-dues-export.csv';
+  } else {
+    rows = [['Item', 'Company', 'Quantity', 'Rate', 'GST %', 'Final Rate (with GST)', 'Least Sold Price (with GST)', 'Highest Sold Price (with GST)', 'Value (with GST)'], ...visibleItems.map(item => [
       item.name,
       companyNameOf(item),
       item.quantityText || item.quantity,
@@ -442,13 +483,15 @@ function exportCsv() {
       item.highestSoldPrice ? (item.highestSoldPrice * 1.18).toFixed(2) : '',
       (item.value * 1.18).toFixed(2)
     ])];
+    filename = 'stock-dashboard-export.csv';
+  }
 
   const csv = rows.map(row => row.map(cell => `"${String(cell).replaceAll('"', '""')}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = activeView === 'duesView' ? 'customer-dues-export.csv' : 'stock-dashboard-export.csv';
+  link.download = filename;
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -505,6 +548,7 @@ els.lowLimit.addEventListener('input', (e) => {
 });
 
 els.customerSearch.addEventListener('input', debounce(() => renderCustomerDues(), 150));
+els.creditorSearch.addEventListener('input', debounce(() => renderCreditors(), 150));
 
 els.salesYearFilter.addEventListener('change', renderSelectedSalesYear);
 
